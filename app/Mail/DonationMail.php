@@ -88,3 +88,4 @@ class DonationMail extends Mailable
         return [];
     }
 }
+

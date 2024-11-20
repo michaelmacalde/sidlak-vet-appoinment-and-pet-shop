@@ -163,7 +163,8 @@ class DogResource extends Resource
                 ->label(__('Create Dog')),
             ])
             ->emptyStateIcon('heroicon-o-rectangle-stack')
-            ->emptyStateHeading('No dogs are created');
+            ->emptyStateHeading('No dogs are created')
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getWidgets(): array

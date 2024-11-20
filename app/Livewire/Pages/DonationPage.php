@@ -131,7 +131,7 @@ class DonationPage extends Component
                 'donor_message' => $sanitizedData['donor_message'],
             ]);
 
-            $this->created_at = $donate->created_at;
+            $this->created_at =  $donate->created_at->format('Y-m-d');
 
             // update sang donation
             if ($attachedPaymentIntent->status == 'succeeded') {
@@ -155,6 +155,7 @@ class DonationPage extends Component
                 ));
 
                 $this->reset();
+
                 return $this->redirect(route('page.donate'));
             }
 
@@ -178,10 +179,14 @@ class DonationPage extends Component
                 ));
 
                 $this->reset();
+                // return redirect()->away($redirectUrl); //ari sa laragon
+
+                return redirect()->away($redirectUrl);
+                // herd setup ni ang redirect url
                 // redirect to paymongo payment page
-                return $this->redirect(route('donation.redirect', [
-                    'url' => $redirectUrl
-                ]));
+                // return $this->redirect(route('donation.redirect', [
+                //     'url' => $redirectUrl
+                // ]));
             }
 
         } catch (\Exception $e) {

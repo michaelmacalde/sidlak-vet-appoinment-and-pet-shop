@@ -7,39 +7,33 @@ We are deeply grateful for your generous donation of **₱{{ number_format($dono
 <br><br>
 ## Donation Receipt Details:
 
-@component('mail::panel')
 **Receipt Number:** {{ $donation_number }}<br>
-**Date:** {{ $created_at->format('F j, Y') }}<br>
+**Date:** {{ $created_at }}<br>
 **Amount:** ₱{{ number_format($donor_amount, 2) }}<br>
 **Payment Method:** {{ ucwords($donor_payment_method) }}
-@endcomponent
-
 
 ## Your Message:
 {{ $donor_message }}
 <br>
+<br>
 ## Your Information:
-@component('mail::panel')
+
 **Name:** {{ $donor_name }}<br>
 **Email:** {{ $donor_email }}<br>
-**Phone Number:** {{ $donor_phone_number }}<br>
- {{ $donor_address }}<br>
-@endcomponent
+**Phone:** {{ $donor_phone_number }}<br>
+**Address:** {{ $donor_address }}<br>
 <br>
+<br>
+## Your contribution will be used to:<br>
+- Provide food and shelter for rescued animals
+- Cover medical expenses and treatments
+- Support our adoption program
+- Maintain our facilities
 
-## Your contribution will be used to:
-@component('mail::panel')
-<ul>
-    <li>Provide food and shelter for rescued animals</li>
-    <li>Cover medical expenses and treatments</li>
-    <li>Support our adoption program</li>
-    <li>Maintain our facilities</li>
-</ul>
-@endcomponent
 <br>
-@component('mail::button', ['url' => $url])
+<x-mail::button :url="$url" color="primary">
 Visit Our Website
-@endcomponent
+</x-mail::button>
 <br>
 Thanks again for your support!
 <br>
@@ -53,3 +47,6 @@ Best regards,<br>
 Donation Reference: {{ $donation_number }}</small>
 <br>
 </x-mail::message>
+
+
+
