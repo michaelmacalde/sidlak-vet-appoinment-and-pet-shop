@@ -13,4 +13,4 @@ The web-based platform facilitates the management of adoption, donation and volu
 The system’s effectiveness relies heavily on reliable internet connectivity within the shelter and in the user for the successful implementation of the system depends on how the shelter and the user will access the system. giving a guide or a training on how to use the website and have a user friendly system will help them understand the process.
 
 
-@COPYRGIHT - 2024
+@COPYRIGHT - 2024
