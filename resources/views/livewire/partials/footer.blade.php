@@ -3,7 +3,7 @@
       <!-- Grid -->
       <div class="text-center">
         <div>
-          <a class="flex-none text-xl font-semibold text-black dark:text-white" href="index.html" aria-label="Brand">SDAS</a>
+          <a class="flex-none text-xl font-semibold text-black dark:text-white" href="{{ route('page.home') }}" aria-label="Brand">SDAS</a>
         </div>
         <!-- End Col -->
 

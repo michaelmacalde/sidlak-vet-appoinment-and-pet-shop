@@ -14,10 +14,6 @@ use App\Livewire\Pages\VolunteerPage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', HomePage::class)->name('page.home');
 Route::get('/dogs', DogPage::class)->name('page.dogs');
 Route::get('/dogs/{dog_slug}', DogSinglePage::class)->name('page.dog.single');

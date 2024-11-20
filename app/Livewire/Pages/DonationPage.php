@@ -66,7 +66,7 @@ class DonationPage extends Component
             'donor_name' => 'required|min:3|max:100',
             'donor_phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11|max:11',
             'donor_address' => 'nullable|string|max:255',
-            'donor_amount' => 'required|numeric|min:1|max:999999.99',
+            'donor_amount' => 'required|numeric|min:100|max:999999.99',
             'donor_payment_method' => 'required|in:gcash,card,paymaya,grab_pay',
             'donor_message' => 'nullable|string|max:500',
         ];

@@ -21,14 +21,14 @@ We are deeply grateful for your generous donation of **₱{{ number_format($dono
 **Name:** {{ $donor_name }}<br>
 **Email:** {{ $donor_email }}<br>
 **Phone:** {{ $donor_phone_number }}<br>
-**Address:** {{ $donor_address }}<br>
+**Address:** {{ $donor_address }}
 <br>
 <br>
-## Your contribution will be used to:<br>
-- Provide food and shelter for rescued animals
-- Cover medical expenses and treatments
-- Support our adoption program
-- Maintain our facilities
+## Your contribution will be used to:
+1. Provide food and shelter for rescued animals
+2. Cover medical expenses and treatments
+3. Support our adoption program
+4. Maintain our facilities
 
 <br>
 <x-mail::button :url="$url" color="primary">

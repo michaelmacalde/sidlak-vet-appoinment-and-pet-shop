@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Mail\ContactMail;
 use App\Mail\InquirySubmitted;
 use App\Models\Contact\Inquiry;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,7 @@ class ContactPage extends Component
            // create inquiry
            $inquiry = Inquiry::create($sanitizedData);
            // send email
-           Mail::to($this->email)->send(new InquirySubmitted($inquiry));
+           Mail::to($this->email)->send(new ContactMail($inquiry));
        });
 
        // flash

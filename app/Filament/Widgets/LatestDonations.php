@@ -47,6 +47,7 @@ class LatestDonations extends BaseWidget
                 TextColumn::make('donor_amount')
                     ->label('Amount')
                     ->money('PHP')
+                    ->prefix('₱')
                     ->searchable()
                     ->sortable(),
 
