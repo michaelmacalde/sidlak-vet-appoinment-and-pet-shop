@@ -51,7 +51,7 @@ Follow the steps below to set up the project locally:
 
 ### 1️⃣ Clone the Repository
 ```
-git clone https://github.com/your-username/sidlak-dog-adoption-system.git
+git clone https://github.com/arielsegumpan/sidlak-animal-welfare.git
 cd sidlak-dog-adoption-system
 ```
 
