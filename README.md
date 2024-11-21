@@ -36,6 +36,11 @@ Ensure your environment meets these prerequisites:
 - **Node.js**: >= 18.x
 - **Database**: MySQL or compatible
 - **Laravel**: Version 11
+- **Livewire**: Version 3
+- **Laravel-Paymongo**: ^2.5
+- **Livewire-alert**: ^3.0
+- **Laravel-trend**: ^0.3.0
+- **Preline UI**: 2.5.1
 - **Git**
 
 ---
