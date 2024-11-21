@@ -6,7 +6,7 @@
 
 ✅ Web-Based Adoption, Donation and Volunteering Report System for Unsheltered Dogs of Sidlak Animal Welfare Group of Victorias City
 
-COLLEGIO DE STA ANA DE VICTORIAS INC.
+### COLLEGIO DE STA ANA DE VICTORIAS INC.
 
 The **Sidlak Dog Adoption System** is a web application designed to streamline dog adoption processes. Built using the **TALL Stack** (TailwindCSS, Alpine.js, Laravel, and Livewire), it leverages **Laravel 11** for robust backend functionality and a modern user experience.
 
