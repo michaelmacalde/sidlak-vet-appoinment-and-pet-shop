@@ -29,7 +29,7 @@
                         <img class="object-cover w-full rounded-xl" src="{{ asset(Storage::url($post->post_image)) }}" alt="{{ $post->post_title }}">
                     </figure>
                     {{-- <br> --}}
-                    {!! $post->post_content !!}
+                    {!! str($post->post_content)->sanitizeHtml() !!}
                     {{-- <br> --}}
                     <div class="grid lg:flex lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
                         <!-- Badges/Tags -->

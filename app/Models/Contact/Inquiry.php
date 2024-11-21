@@ -11,6 +11,6 @@ class Inquiry extends Model
 
     protected $table = 'inquiries';
     protected $fillable = [
-        'name', 'phone', 'email', 'subject', 'message'
+        'name', 'phone', 'email', 'subject', 'message', 'user_id', 'is_replied', 'replied_at'
     ];
 }
