@@ -123,3 +123,30 @@ chmod -R 775 storage bootstrap/cache
 
 ### 📜 License
 This project is licensed under the MIT License. Feel free to use, modify, and distribute this software in compliance with the license.
+
+
+### Dashboard
+![FireShot Capture 042 - Dashboard - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/f9dbfe29-5fed-48ae-8b59-4ec5a82f8a3f)
+
+### Dogs
+![FireShot Capture 040 - Dogs - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/7ad83432-1ade-4918-97fa-78533ebbf0b9)
+![FireShot Capture 041 - Molly - Siberian Husky - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/963364bb-6d2d-45fd-9bb2-1be9430f7ffb)
+
+### Donations
+![FireShot Capture 043 - Donations - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/41511bb1-8643-40b2-b0de-cdbeac707e7b)
+
+### Volunteers
+![FireShot Capture 044 - Volunteers - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/99207d2a-01ee-4325-94c9-4e71db26a88f)
+
+### Adoption
+![FireShot Capture 047 - Adoptions - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/54008871-6b8b-4360-836f-15956307ab03)
+
+### Blog
+![FireShot Capture 048 - Posts - Sidlak Animal Welfare - sidlak-animal-welfare test](https://github.com/user-attachments/assets/6395f98e-32ea-4b20-8c91-2840e032bce1)
+![FireShot Capture 049 - Homemade Dog Treat Recipes Your Pup Will Love - Sidlak Animal Welfare_ - sidlak-animal-welfare test](https://github.com/user-attachments/assets/f5b85285-7690-479c-84dc-b093053d37f9)
+
+
+
+
+
+
