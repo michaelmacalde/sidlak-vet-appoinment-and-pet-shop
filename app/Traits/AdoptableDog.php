@@ -2,9 +2,11 @@
 
 namespace App\Traits;
 
+use App\Livewire\Adoption\AdoptionCartCounter;
 use App\Models\Adoption\AdoptionCart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
@@ -12,23 +14,41 @@ use Livewire\Attributes\Rule;
 
 trait AdoptableDog
 {
+    use LivewireAlert;
+    use AdoptionCartTrait;
+
     #[Locked]
     #[Rule('required|integer|exists:dogs,id')]
     public $adopt_id;
 
-    private $get_user_adopt_count = 0;
 
+    #[On('add-to-adoption-cart')]
     public function adoptDog($id)
     {
-
-       $this->get_user_adopt_count = $this->getUserAdoptCount();
-
         if (!auth()->check()) {
             return $this->redirect(route('login'));
         }
 
-        if($this->get_user_adopt_count > 2){
-            return;
+        $adoption_cart_info = $this->getAdoptionCartInfo(auth()->id(),  $id);
+
+        if ($adoption_cart_info->dog_exists > 0) {
+
+            return $this->alert('error', '', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+                'text' => 'This dog is already in your selected adoption.',
+               ]);
+        }
+
+
+        if($adoption_cart_info->total_count >= 3){
+            return $this->alert('error', '', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+                'text' => 'You can only select 3 dogs for adoption.',
+               ]);
         }
 
         $this->adopt_id = $id;
@@ -45,15 +65,25 @@ trait AdoptableDog
                         'updated_at' => now()
                     ]
                 );
+
+                $this->dispatch('add-to-adoption-cart')->to(AdoptionCartCounter::class);
+
+                $this->alert('success', '', [
+                    'position' => 'bottom-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                    'text' => 'Successfully added',
+                   ]);
             });
 
-            $this->dispatchAlert('success', 'Successfully added to adoption cart');
+
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->dispatchAlert('error', 'Invalid dog selection.');
-            Log::warning('Adoption validation error: ' . $e->getMessage());
+
         } catch (\Exception $e) {
             $this->dispatchAlert('error', 'Failed to add to adoption cart. Please try again.');
-            Log::error('Adoption cart error: ' . $e->getMessage());
+
         }
     }
 
@@ -68,19 +98,8 @@ trait AdoptableDog
         ]);
     }
 
-    protected function getUserAdoptCount(){
+    // protected function getUserAdoptCount(){
 
-        return AdoptionCart::where('user_id', auth()->id())->count();
-    }
-
-    // public function updateadoptCount()
-    // {
-    //     $this->adoptCount = AdoptionCart::where('user_id', auth()->id())->count();
-    // }
-
-    // Add this method to the trait
-    // public function getadoptCount()
-    // {
-    //     return $this->adoptCount = AdoptionCart::where('user_id', auth()->id())->count();
+    //     return AdoptionCart::where('user_id', auth()->id())->count();
     // }
 }

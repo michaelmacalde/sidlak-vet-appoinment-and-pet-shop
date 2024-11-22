@@ -12,6 +12,11 @@ class AdoptionCartCounter extends Component
 {
     public $count = 0;
 
+    public function mount()
+    {
+        $this->getAdoptionCartCount();
+    }
+
     #[On('add-to-adoption-cart')]
     public function getAdoptionCartCount()
     {

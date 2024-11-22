@@ -19,8 +19,8 @@
                 {{ $dog->limited_description }}
             </p>
 
-            <h6 class="mt-5 text-lg font-semibold text-gray-800  sm:text-sm dark:text-neutral-300">
-                {{ __('Gender : ' . $string = $dog->dog_gender) }}
+            <h6 class="mt-5 text-lg font-semibold text-gray-800 sm:text-sm dark:text-neutral-300">
+                {{ __('Gender : ' . ucfirst($dog->dog_gender)) }}
             </h6>
         </a>
             <div class="mt-5 sm:mt-auto">

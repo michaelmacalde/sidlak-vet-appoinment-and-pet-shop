@@ -134,7 +134,7 @@
                 <x-nav-link wire:navigate.hover href="{{ route('page.home') }}" :active="request()->routeIs('page.home')">{{ __('Home') }}</x-nav-link>
                 <x-nav-link wire:navigate.hover href="{{ route('page.donate') }}" :active="request()->routeIs('page.donate')">{{ __('Give Love') }}</x-nav-link>
                 <x-nav-link wire:navigate.hover href="{{ route('page.volunteer') }}" :active="request()->routeIs('page.volunteer')">{{ __('Volunteers') }}</x-nav-link>
-                <x-nav-link wire:navigate.hover href="{{ route('page.dogs') }}" :active="request()->routeIs('page.dogs') || request()->routeIs('page.dog.single')">{{ __('Dogs') }}</x-nav-link>
+                <x-nav-link wire:navigate href="{{ route('page.dogs') }}" :active="request()->routeIs('page.dogs') || request()->routeIs('page.dog.single')">{{ __('Dogs') }}</x-nav-link>
                 <x-nav-link wire:navigate.hover href="{{ route('page.blogs') }}" :active="request()->routeIs('page.blogs') || request()->routeIs('page.blog.single')">{{ __('Blogs') }}</x-nav-link>
                 <x-nav-link wire:navigate.hover href="{{ route('page.contact') }}" :active="request()->routeIs('page.contact')">{{ __('Contact') }}</x-nav-link>
             </div>

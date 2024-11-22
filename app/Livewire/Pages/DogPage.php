@@ -8,6 +8,7 @@ use App\Models\Adoption\AdoptionCart;
 use App\Models\Animal\Breed;
 use App\Models\Animal\Dog;
 use App\Traits\AdoptableDog;
+use App\Traits\AdoptionCartTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -26,6 +27,8 @@ class DogPage extends Component
     use WithPagination;
     use WithDogBreeds;
     use LivewireAlert;
+    use AdoptionCartTrait;
+    use AdoptableDog;
 
     #[Url(as: 'q')]
     public $breed = '';
@@ -35,8 +38,6 @@ class DogPage extends Component
 
     public $adopt_count = 0;
     public $adoptionStatus = [];
-
-    // protected $queryString = ['breed', 'page' => ['except' => 1]];
 
     #[Computed()]
     public function getDogsPage()
@@ -51,83 +52,10 @@ class DogPage extends Component
 
     }
 
-    public function updateAdoptionStatus()
-    {
-        if (auth()->user()) {
-            $adoptedDogs = AdoptionCart::where('user_id', auth()->user()->id)->pluck('dog_id')->toArray();
-            $this->adoptionStatus = array_fill_keys($adoptedDogs, true);
-        }
-    }
-
     #[On('add-to-adoption-cart')]
     public function adopt($id){
-        $this->dog_id_page = $id;
-
-        if(auth()->user()){
-            $data = [
-                'user_id' => auth()->user()->id,
-                'dog_id' => $this->dog_id_page,
-            ];
-
-            // $get_adoption_cart = AdoptionCart::query()->where('user_id', $data['user_id'])->where('dog_id', $data['dog_id'])->first();
-            $adoption_cart_info = AdoptionCart::where('user_id', $data['user_id'])
-                ->selectRaw('COUNT(*) as total_count')
-                ->addSelect(['dog_exists' => AdoptionCart::where('user_id', $data['user_id'])
-                    ->where('dog_id', $data['dog_id'])
-                    ->selectRaw('COUNT(*)')
-                ])
-                ->first();
-
-
-            if ($adoption_cart_info->dog_exists > 0) {
-                   $this->alert('error', '', [
-                    'position' => 'bottom-end',
-                    'timer' => 3000,
-                    'toast' => true,
-                    'text' => 'This dog is already in your selected adoption.',
-                   ]);
-                return;
-            }
-
-
-            if($adoption_cart_info->total_count >= 3){
-                $this->alert('error', '', [
-                    'position' => 'bottom-end',
-                    'timer' => 3000,
-                    'toast' => true,
-                    'text' => 'You can only select 3 dogs for adoption.',
-                   ]);
-                return;
-            }
-
-            try {
-
-                DB::transaction(function () use ($data) {
-                    AdoptionCart::updateOrCreate(
-                        [
-                            'user_id' => $data['user_id'],
-                             'dog_id' => $data['dog_id']
-                        ],
-                        $data
-                    );
-                    $this->dispatch('add-to-adoption-cart')->to(AdoptionCartCounter::class);
-
-                    $this->alert('success', '', [
-                        'position' => 'bottom-end',
-                        'timer' => 3000,
-                        'toast' => true,
-                        'text' => 'Successfully added',
-                       ]);
-                });
-
-            } catch (\Exception $e) {
-                session()->flash('error', 'Failed to create volunteer. Please try again.');
-            }
-
-        }else{
-            return redirect()->route('login');
-        }
-
+        // call the adopt dog method sa adaptable dog traits
+        $this->adoptDog($id);
     }
 
     #[Title('Dogs Page')]

@@ -24,4 +24,14 @@ class AdoptionCart extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeGetCartInfo($query, $userId, $dogId)
+    {
+        return $query->where('user_id', $userId)
+            ->selectRaw('COUNT(*) as total_count')
+            ->addSelect(['dog_exists' => static::where('user_id', $userId)
+                ->where('dog_id', $dogId)
+                ->selectRaw('COUNT(*)')
+            ]);
+    }
 }

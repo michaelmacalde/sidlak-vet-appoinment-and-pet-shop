@@ -41,6 +41,7 @@ class AdoptionCart extends Component
 
             if ($adoptionItem) {
                 $adoptionItem->delete();
+
                 $this->dispatch('add-to-adoption-cart')->to(AdoptionCartCounter::class);
                 $this->alert('success', '', [
                     'position' => 'bottom-end',
