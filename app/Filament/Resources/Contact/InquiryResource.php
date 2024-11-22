@@ -93,6 +93,8 @@ class InquiryResource extends Resource
                 ->limit(70)
                 ->wrap()
                 ->html()
+
+
             ])
             ->filters([
                 //
