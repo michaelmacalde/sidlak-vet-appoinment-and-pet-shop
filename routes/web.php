@@ -11,7 +11,6 @@ use App\Livewire\Pages\DonationPage;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\SingleBlogPostPage;
 use App\Livewire\Pages\VolunteerPage;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePage::class)->name('page.home');
@@ -29,6 +28,7 @@ Route::get('/selected-dogs', AdoptionCart::class)->name('page.cart');
 
 Route::get('/donate', DonationPage::class)->name('page.donate');
 
+// this work in laravel herd not in laragon
 Route::get('/donation/redirect', [PaymentController::class, 'handleRedirect'])->name('donation.redirect');
 
 

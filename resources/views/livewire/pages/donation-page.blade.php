@@ -31,12 +31,12 @@
                 <form wire:submit.prevent="save">
                 <!-- Section -->
                 <div class="py-6 border-t border-gray-200 first:pt-0 last:pb-0 first:border-transparent dark:border-neutral-700 dark:first:border-transparent">
-                    <label class="inline-block text-sm font-medium dark:text-white">
+                    <label class="inline-block mb-2 text-sm font-medium lg:mb-3 dark:text-white">
                         {{'Donation Method'}}
                     </label>
 
                     <div class="mt-2 space-y-3">
-                        <div class="grid gap-2 space-y-3 sm:grid-cols-2">
+                        <div class="grid gap-4 sm:grid-cols-2">
                             <!-- GCash -->
                             <div class="relative flex items-start">
                                 <div class="flex items-center h-5 mt-1">
@@ -52,13 +52,7 @@
                                 <label for="payment-gcash" class="ms-3">
                                     <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">
 
-                                        <div class="flex flex-row items-center align-middle">
-                                            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                                            <svg width="20px" height="20px" class="mr-2 shrink-0" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M84 96h36c0 19.882-16.118 36-36 36s-36-16.118-36-36 16.118-36 36-36c9.941 0 18.941 4.03 25.456 10.544"/><path fill="#ffffff" d="M145.315 66.564a6 6 0 0 0-10.815 5.2l10.815-5.2ZM134.5 120.235a6 6 0 0 0 10.815 5.201l-10.815-5.201Zm-16.26-68.552a6 6 0 1 0 7.344-9.49l-7.344 9.49Zm7.344 98.124a6 6 0 0 0-7.344-9.49l7.344 9.49ZM84 152c-30.928 0-56-25.072-56-56H16c0 37.555 30.445 68 68 68v-12ZM28 96c0-30.928 25.072-56 56-56V28c-37.555 0-68 30.445-68 68h12Zm106.5-24.235C138.023 79.09 140 87.306 140 96h12c0-10.532-2.399-20.522-6.685-29.436l-10.815 5.2ZM140 96c0 8.694-1.977 16.909-5.5 24.235l10.815 5.201C149.601 116.522 152 106.532 152 96h-12ZM84 40c12.903 0 24.772 4.357 34.24 11.683l7.344-9.49A67.733 67.733 0 0 0 84 28v12Zm34.24 100.317C108.772 147.643 96.903 152 84 152v12a67.733 67.733 0 0 0 41.584-14.193l-7.344-9.49Z"/><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M161.549 58.776C166.965 70.04 170 82.666 170 96c0 13.334-3.035 25.96-8.451 37.223"/></svg>
-
-                                            {{'GCash'}}
-                                        </div>
-
+                                        <img src="{{asset('imgs/gcash.png')}}" class="w-auto h-8 mb-2" />
 
                                     </span>
                                     <span class="block text-sm text-gray-600 dark:text-neutral-500">{{'Donate using your GCash account'}}</span>
@@ -78,7 +72,9 @@
                                     >
                                 </div>
                                 <label for="payment-card" class="ms-3">
-                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">{{'Credit/Debit Card'}}</span>
+                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">
+                                        <img src="{{asset('imgs/card.png')}}" class="w-auto h-8 mb-2" />
+                                    </span>
                                     <span class="block text-sm text-gray-600 dark:text-neutral-500">{{'Donate using your credit or debit card'}}</span>
                                 </label>
                             </div>
@@ -96,7 +92,9 @@
                                     >
                                 </div>
                                 <label for="payment-paymaya" class="ms-3">
-                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">{{'PayMaya'}}</span>
+                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">
+                                        <img src="{{asset('imgs/paymaya.png')}}" class="w-auto h-8 mb-2" />
+                                    </span>
                                     <span class="block text-sm text-gray-600 dark:text-neutral-500">{{'Donate using your PayMaya account'}}</span>
                                 </label>
                             </div>
@@ -114,7 +112,9 @@
                                     >
                                 </div>
                                 <label for="payment-grabpay" class="ms-3">
-                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">{{'GrabPay'}}</span>
+                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-300">
+                                        <img src="{{asset('imgs/grabpay.png')}}" class="w-auto h-8 mb-2" />
+                                    </span>
                                     <span class="block text-sm text-gray-600 dark:text-neutral-500">{{'Donate using your GrabPay wallet'}}</span>
                                 </label>
                             </div>
