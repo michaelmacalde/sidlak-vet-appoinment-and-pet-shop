@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Mail\VolunteerWelcome;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Volunteer\Volunteer;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,16 @@ class VolunteerPage extends Component
     #[Validate('required|max:65535', as: 'Reason', message: 'The reason field is required.')]
     public $v_reason;
 
+    protected function ensureVolunteerRoleExists()
+    {
+        $volunteerRole = Role::where('name', 'volunteer')->first();
+
+        if (!$volunteerRole) {
+            // Create the volunteer role if it doesn't exist
+            Role::create(['name' => 'volunteer', 'guard_name' => 'web']);
+        }
+    }
+
     public function submit()
     {
         $this->validate();
@@ -55,6 +66,14 @@ class VolunteerPage extends Component
                         'password' => Hash::make($temporaryPassword),
                     ]
                 );
+
+                // Ensure volunteer role exists before assigning
+                $this->ensureVolunteerRoleExists();
+
+                // Assign the volunteer role
+                if (!$user->hasRole('volunteer')) {
+                    $user->assignRole('volunteer');
+                }
 
                 Volunteer::updateOrCreate(
                     ['user_id' => $user->id],

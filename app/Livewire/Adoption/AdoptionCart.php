@@ -31,7 +31,7 @@ class AdoptionCart extends Component
 
         return $this->adopt_items;
     }
-
+    #[On('add-to-adoption-cart')]
     public function removeAdoptionItem($id){
         $this->adoptId = $id;
         try {
