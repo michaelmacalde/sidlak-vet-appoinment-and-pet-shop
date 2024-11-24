@@ -16,20 +16,35 @@ trait AdoptableDog
 {
     use LivewireAlert;
     use AdoptionCartTrait;
+    use AdoptionTrait;
 
     #[Locked]
     #[Rule('required|integer|exists:dogs,id')]
     public $adopt_id;
 
 
-    #[On('add-to-adoption-cart')]
+    // #[On('add-to-adoption-cart')]
     public function adoptDog($id)
     {
         if (!auth()->check()) {
             return $this->redirect(route('login'));
         }
 
+        $getExists = $this->getAdoptionExists(auth()->id(), $id);
+
+        if ($getExists > 0) {
+            return $this->alert('error', '', [
+                'position' => 'bottom-end',
+                'timer' => 3000,
+                'toast' => true,
+                'text' => 'This dog is already in your requested adoption.',
+               ]);
+        }
+
+
         $adoption_cart_info = $this->getAdoptionCartInfo(auth()->id(),  $id);
+
+
 
         if ($adoption_cart_info->dog_exists > 0) {
 
@@ -52,6 +67,8 @@ trait AdoptableDog
         }
 
         $this->adopt_id = $id;
+
+
 
         try {
 

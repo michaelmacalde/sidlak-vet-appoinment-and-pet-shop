@@ -18,6 +18,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -92,7 +93,28 @@ class InquiryResource extends Resource
                 TextColumn::make('message')
                 ->limit(70)
                 ->wrap()
-                ->html()
+                ->html(),
+
+                IconColumn::make('is_replied')
+                    ->icon(fn (string $state): string => match ($state) {
+                        '0' => 'heroicon-o-x-circle',
+                        '1' => 'heroicon-o-check-circle',
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        '0' => 'danger',
+                        '1' => 'success',
+                }),
+
+                TextColumn::make('user.name')
+                ->label('Replied By')
+                ->searchable()
+                ->sortable()
+                ->placeholder('N/A'),
+
+                TextColumn::make('replied_at')
+                ->label('Replied At')
+                ->searchable()
+                ->date()
 
 
             ])
@@ -116,7 +138,8 @@ class InquiryResource extends Resource
 
                         RichEditor::make('reply_message')
                             ->label('Reply Message')
-                            ->required(),
+                            ->required()
+                            ->maxLength(65535),
                     ])
                     ->action(function (Inquiry $record, array $data): void {
                         try {

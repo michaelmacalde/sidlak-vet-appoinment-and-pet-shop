@@ -34,4 +34,5 @@ class AdoptionCart extends Model
                 ->selectRaw('COUNT(*)')
             ]);
     }
+
 }
