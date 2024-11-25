@@ -13,7 +13,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-
+use Illuminate\Support\Str;
 class ApplicationForm extends Component
 {
     public $dog;
@@ -152,7 +152,7 @@ class ApplicationForm extends Component
                         'dog_id' => $dogId,
                     ],
                     [
-                        'adoption_number' => 'AR-' . date('Ymd-His-') . random_int(100000, 999999),
+                        'adoption_number' => 'AR-'. date('His-') . strtoupper(Str::random(6)),
                         'status' => 'pending',
                         'application_form_id' => $applicationForm->id,
                         'request_date' => now(),
@@ -232,7 +232,7 @@ class ApplicationForm extends Component
         //                 'dog_id' => $dogId,
         //             ],
         //             [
-        //                 'adoption_number' => 'AR-' . date('Ymd-His-') . random_int(100000, 999999),
+        //                 'adoption_number' => 'AR-'. date('His-') . strtoupper(Str::random(6)),
         //                 'status' => 'pending',
         //                 'request_date' => now(),
         //             ]

@@ -31,6 +31,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class AdoptionResource extends Resource
 {
@@ -52,7 +53,7 @@ class AdoptionResource extends Resource
                 ->description('Please provide the following information about the adoption.')
                 ->schema([
                     TextInput::make('adoption_number')
-                    ->default('AR-'. date('Ymd-His-') . random_int(100000, 999999))
+                    ->default('AR-'. date('His-') . strtoupper(Str::random(6)))
                     ->disabled()
                     ->dehydrated()
                     ->required()
