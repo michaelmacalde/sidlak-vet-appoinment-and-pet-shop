@@ -57,6 +57,7 @@ class AdoptionCart extends Component
 
             DB::commit();
         } catch (\Exception $e) {
+            DB::rollBack();
             throw $e; // or abort(500, 'Error deleting item');
         }
     }

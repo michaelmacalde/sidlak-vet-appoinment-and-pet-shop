@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Adoption\AdoptionCartCounter;
 use App\Models\Adoption\Adoption;
 use App\Models\Adoption\AdoptionCart;
 use App\Models\Application\ApplicationForm as ApplicationApplicationForm;
@@ -162,7 +163,11 @@ class ApplicationForm extends Component
 
                 AdoptionCart::where('user_id', auth()->id())->where('dog_id', $dogId)->delete();
             }
+
+
         });
+
+        $this->dispatch('add-to-adoption-cart')->to(AdoptionCartCounter::class);
 
         session()->flash('message', 'Application submitted successfully.');
 

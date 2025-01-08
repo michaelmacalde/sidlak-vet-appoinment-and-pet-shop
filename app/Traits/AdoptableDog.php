@@ -32,6 +32,8 @@ trait AdoptableDog
 
         $getExists = $this->getAdoptionExists(auth()->id(), $id);
 
+        $getAdoptionCount = $this->getAdoptionCount(auth()->id(), $id);
+
         if ($getExists > 0) {
             return $this->alert('error', '', [
                 'position' => 'bottom-end',
@@ -41,6 +43,7 @@ trait AdoptableDog
                ]);
         }
 
+        // if($getAdoptionCount > 3)
 
         $adoption_cart_info = $this->getAdoptionCartInfo(auth()->id(),  $id);
 

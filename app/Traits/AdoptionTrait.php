@@ -13,4 +13,11 @@ trait AdoptionTrait
         $exists = Adoption::getCheckAdoptionRequest($userId, $dogId);
        return $exists;
     }
+
+    public function getAdoptionCount($userId, $dogId)
+    {
+        $adoptionCount = Adoption::getAdoptionCount($userId, $dogId);
+
+        return $adoptionCount;
+    }
 }

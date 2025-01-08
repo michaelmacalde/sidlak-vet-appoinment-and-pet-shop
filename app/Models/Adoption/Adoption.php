@@ -39,4 +39,11 @@ class Adoption extends Model
             ->where('dog_id', $dogId)
             ->exists();
     }
+
+    public function scopeGetAdoptionRequest($query,$userId, $dogId)
+    {
+        return $query->where('user_id', $userId)
+            ->where('dog_id', $dogId)
+            ->count();
+    }
 }

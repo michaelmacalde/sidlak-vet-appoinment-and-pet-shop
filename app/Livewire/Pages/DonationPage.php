@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Pages;
 
 use App\Mail\DonationMail;
@@ -44,7 +43,7 @@ class DonationPage extends Component
     // initialize variables
     public function mount()
     {
-        $this->donation_number = 'DON-' . strtoupper(Str::random(10));
+        $this->generateDonationNumber();
     }
 
     // validate data kag update sang payment method selected
@@ -104,6 +103,7 @@ class DonationPage extends Component
             fn($value) => $this->sanitizeInput($value),
             $validated
         );
+
         // create sang payment intent with paymongo
         $this->paymentCreateIntent($sanitizedData['donor_amount']);
 
@@ -115,7 +115,7 @@ class DonationPage extends Component
             // create sang payment method with paymongo
             $this->paymentCreateMethod($sanitizedData);
 
-            $attachedPaymentIntent = $this->createPaymentIntent->attach($this->paymentMethod->id, 'https://sidlak-animal-welfare.test/donate');
+            $attachedPaymentIntent = $this->createPaymentIntent->attach($this->paymentMethod->id, route('page.donate'));
 
             // create sang donation
            $donate = Donation::create([
@@ -140,7 +140,7 @@ class DonationPage extends Component
 
                 session()->flash('message', 'Donation created successfully!');
 
-                $this->donation_number = 'DON-' . strtoupper(Str::random(10));
+                $this->generateDonationNumber();
 
                 Mail::to($this->donor_email)->send(new DonationMail(
                     $this->donor_name,
@@ -156,12 +156,14 @@ class DonationPage extends Component
 
                 $this->reset();
 
-                return $this->redirect(route('page.donate'));
+                $redirectUrl = $attachedPaymentIntent->next_action['redirect']['url'];
+
+                return redirect($redirectUrl); //ari sa laragon
             }
 
             // update sang donation
-            if ($attachedPaymentIntent->status === 'awaiting_next_action') {
-
+            if ($attachedPaymentIntent->status === 'awaiting_next_action')
+            {
                 $redirectUrl = $attachedPaymentIntent->next_action['redirect']['url'];
 
                 session()->flash('message', 'Donation created successfully!');
@@ -179,9 +181,10 @@ class DonationPage extends Component
                 ));
 
                 $this->reset();
-                // return redirect()->away($redirectUrl); //ari sa laragon
 
-                return redirect()->away($redirectUrl);
+                return redirect($redirectUrl); //ari sa laragon
+
+                // return redirect()->away($redirectUrl);
                 // herd setup ni ang redirect url
                 // redirect to paymongo payment page
                 // return $this->redirect(route('donation.redirect', [
@@ -259,4 +262,8 @@ class DonationPage extends Component
         }
     }
 
+    protected function generateDonationNumber(): void
+    {
+        $this->donation_number = 'DON-' . strtoupper(Str::random(10));
+    }
 }
