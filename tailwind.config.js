@@ -21,4 +21,5 @@ export default {
     },
 
     plugins: [forms, typography, require('preline/plugin'),],
+    darkMode: 'selector',
 };

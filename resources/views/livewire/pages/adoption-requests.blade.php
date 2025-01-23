@@ -264,7 +264,7 @@
 
           <!-- Footer -->
           <div class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:justify-between md:items-center dark:border-neutral-700">
-            <div class="max-w-sm space-y-3">
+            {{-- <div class="max-w-sm space-y-3">
               <select class="block px-3 py-2 text-sm border-gray-200 rounded-lg pe-9 focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                 <option>1</option>
                 <option>2</option>
@@ -273,8 +273,8 @@
                 <option selected>5</option>
                 <option>6</option>
               </select>
-            </div>
-
+            </div> --}}
+{{--
             <div>
               <div class="inline-flex gap-x-2">
                 <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
@@ -287,7 +287,7 @@
                   <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                 </button>
               </div>
-            </div>
+            </div> --}}
           </div>
           <!-- End Footer -->
         </div>

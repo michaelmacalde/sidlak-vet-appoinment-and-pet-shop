@@ -31,7 +31,7 @@ class LatestDonations extends BaseWidget
             )
             ->columns([
                 TextColumn::make('donation_number')
-                    ->label('Reference')
+                    ->label('Reference #')
                     ->searchable()
                     ->copyable()
                     ->sortable()
