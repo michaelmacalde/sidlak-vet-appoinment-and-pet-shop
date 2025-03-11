@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Seeders;
+
+use Database\Seeders\Ecommerce\ProdCatSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             BlogPostCategorySeeder::class,
             CommentSeeder::class,
+            ProdCatSeeder::class,
             // VolunteerSeeder::class
         ]);
     }

@@ -50,7 +50,7 @@ class VolunteerResource extends Resource
                     ->preload()
                     ->optionsLimit(6),
 
-                    Select::make('role')
+                    Select::make('volunteer_role')
                     ->label('Volunteer Role')
                     ->required()
                     ->options([
@@ -60,18 +60,18 @@ class VolunteerResource extends Resource
                         'community_outreach' => 'Community Outreach',
                     ])->native(false),
 
-                    RichEditor::make('reason')
+                    RichEditor::make('volunteer_reason')
                     ->required()
                     ->placeholder('Reason for joining')
                     ->columnSpanFull()
                     ->maxLength(65535),
 
-                    DatePicker::make('joined_date')
+                    DatePicker::make('volunteer_joined_date')
                     ->required()
                     ->default(now())
                     ->native(false),
 
-                    ToggleButtons::make('status')
+                    ToggleButtons::make('volunteer_status')
                     ->required()
                     ->default('active')->inline()
                     ->options([
@@ -87,7 +87,7 @@ class VolunteerResource extends Resource
                         'inactive' => 'danger',
                     ]),
 
-                    ToggleButtons::make('status_type')
+                    ToggleButtons::make('volunteer_status_type')
                     ->required()
                     ->inline()
                     ->options(VolunteerStatusTypeEnum::class)
@@ -108,15 +108,15 @@ class VolunteerResource extends Resource
         return $table
         ->columns([
             Tables\Columns\TextColumn::make('user.name')->searchable()->sortable()->weight('bold'),
-            Tables\Columns\TextColumn::make('role')
+            Tables\Columns\TextColumn::make('volunteer_role')
             ->label('Volunteer Role')
             ->searchable()
             ->sortable()
             ->formatStateUsing(function (string $state): string {
                 return ucwords(str_replace('_', ' ', $state));
             }),
-            Tables\Columns\TextColumn::make('reason')->wrap()->limit(60)->html(),
-            Tables\Columns\TextColumn::make('status')->sortable()
+            Tables\Columns\TextColumn::make('volunteer_reason')->wrap()->limit(60)->html(),
+            Tables\Columns\TextColumn::make('volunteer_status')->sortable()
             ->badge()
             ->color(fn (string $state): string => match ($state) {
                 'active' => 'success',
@@ -127,7 +127,7 @@ class VolunteerResource extends Resource
                 'inactive' => 'heroicon-o-x-circle',
             })->formatStateUsing(fn (string $state): string => ucwords($state)),
 
-            Tables\Columns\TextColumn::make('status_type')->sortable()
+            Tables\Columns\TextColumn::make('volunteer_status_type')->sortable()
             ->badge()
             ->color(fn (string $state): string => match ($state) {
                 'pending' => 'primary',
@@ -140,7 +140,7 @@ class VolunteerResource extends Resource
                 'rejected' => 'heroicon-o-x-circle',
             })->formatStateUsing(fn (string $state): string => ucwords($state)),
 
-            Tables\Columns\TextColumn::make('joined_date')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('volunteer_joined_date')->searchable()->sortable(),
         ])
         ->filters([
             //
@@ -201,7 +201,7 @@ class VolunteerResource extends Resource
     {
         return $infolist
             ->schema([
-                TextEntry::make('status')
+                TextEntry::make('volunteer_status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'active' => 'success',
@@ -211,7 +211,7 @@ class VolunteerResource extends Resource
                         'active' => 'heroicon-o-check-circle',
                         'inactive' => 'heroicon-o-x-circle',
                     })->formatStateUsing(fn (string $state): string => ucwords($state)),
-                TextEntry::make('status_type')
+                TextEntry::make('volunteer_status_type')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'pending' => 'primary',
@@ -226,8 +226,8 @@ class VolunteerResource extends Resource
                     ->formatStateUsing(fn (string $state): string => ucwords($state)),
 
                 TextEntry::make('user.name')->label('Name')->size(TextEntrySize::Large),
-                TextEntry::make('joined_date'),
-                TextEntry::make('role')->label('Role')
+                TextEntry::make('volunteer_joined_date'),
+                TextEntry::make('volunteer_role')->label('Role')
                     ->formatStateUsing(function (string $state): string {
                         return ucwords(str_replace('_', ' ', $state));
                     }),

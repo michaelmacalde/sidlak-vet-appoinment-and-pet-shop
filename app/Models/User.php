@@ -4,24 +4,29 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Adoption\Adoption;
-use App\Models\Blog\BlogPost;
-use App\Models\Blog\Comment;
-use App\Models\Donation\Donation;
-use App\Models\Volunteer\Volunteer;
-use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
-use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
+use App\Models\Blog\Comment;
+use App\Models\Blog\BlogPost;
+use App\Models\Ecommerce\Cart;
+use App\Models\Ecommerce\Order;
+use App\Models\Adoption\Adoption;
+use App\Models\Donation\Donation;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Volunteer\Volunteer;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Appointment\Appointment;
+use App\Models\Ecommerce\ProductReview;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -33,7 +38,7 @@ class User extends Authenticatable implements FilamentUser
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
-    use HasPanelShield;
+    //use HasPanelShield;
 
     /**
      * The attributes that are mass assignable.
@@ -113,7 +118,20 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasAnyRole(['super_admin', 'volunteer', 'admin']);
+        $user = Auth::user(); // or use auth()->user()
+
+        if (!$user) {
+            return false; // Prevents errors when no user is logged in
+        }
+
+        return $user->hasAnyRole(['super_admin','admin','admin_shop']);
+    }
+
+
+
+    public function announcements() : HasMany
+    {
+        return $this->hasMany(Announcement::class);
     }
 
 
@@ -126,4 +144,25 @@ class User extends Authenticatable implements FilamentUser
     // {
     //     return $this->hasMany(AdoptionCart::class);
     // }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

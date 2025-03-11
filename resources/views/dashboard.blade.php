@@ -28,6 +28,7 @@
 
                 <div class="border-b-2 border-gray-200 dark:border-neutral-700">
                     <nav class="-mb-0.5 flex gap-x-6">
+                        {{-- cart for dogs --}}
                         <a class="inline-flex items-center gap-2 px-1 py-4 text-sm font-medium border-b-2 text-amber-600 border-amber-500 whitespace-nowrap focus:outline-none focus:text-amber-800 dark:text-amber-500" href="{{ route('page.cart') }}" aria-current="page">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -36,6 +37,8 @@
                             </svg>
                             Selected Dog
                         </a>
+                        {{-- cart for ecommerce --}}
+                        
 
                         <a class="inline-flex items-center gap-2 px-1 py-4 text-sm text-gray-500 border-b-2 border-transparent whitespace-nowrap hover:text-amber-600 focus:outline-none focus:text-amber-600 dark:text-neutral-500 dark:hover:text-amber-500 dark:focus:text-amber-500" href="{{ route('page.cart') }}">
                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  width="24" height="24">
@@ -43,16 +46,17 @@
                             </svg>
                             Request
                         </a>
-{{--
 
+                        @if(Auth::user()->hasRole('volunteer'))
+                        <a class="inline-flex items-center gap-2 px-1 py-4 text-sm text-gray-500 border-b-2 border-transparent whitespace-nowrap hover:text-amber-600 focus:outline-none focus:text-amber-600 dark:text-neutral-500 dark:hover:text-amber-500 dark:focus:text-amber-500" href="{{ route('page.announcements') }}">
 
-                        <a class="inline-flex items-center gap-2 px-1 py-4 text-sm text-gray-500 border-b-2 border-transparent whitespace-nowrap hover:text-amber-600 focus:outline-none focus:text-amber-600 dark:text-neutral-500 dark:hover:text-amber-500 dark:focus:text-amber-500" href="#">
-                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
+                            <svg class="shrink-0 size-4" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />
                             </svg>
-                            Tab 3
-                        </a> --}}
+
+                            Announcements
+                        </a>
+                        @endif
                     </nav>
                 </div>
             </div>

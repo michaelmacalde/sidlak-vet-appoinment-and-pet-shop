@@ -173,81 +173,8 @@ class ApplicationForm extends Component
 
         $this->resetExcept(['dog_selected']);
 
-        // $this->dog_selected = AdoptionCart::with(['dog:id,breed_id,dog_name,dog_slug,dog_age,dog_gender,dog_image','dog.breed:id,breed_name'])
-        // ->where('user_id', auth()->id())
-        // ->get();
-
         $this->refreshDogSelected();
 
-        // $this->reset();
-
-        // $validatedData = $this->validate();
-        // $sanitizedData = $this->sanitizeInput($validatedData);
-
-        // DB::transaction(function () use ($sanitizedData) {
-        //     $userId = Auth::id();
-        //     $dogId = $this->dog->id;
-
-        //     $applicationForm = ApplicationForm::updateOrCreate(
-        //         [
-        //             'user_id' => $userId,
-        //             'dog_id' => $dogId,
-        //         ],
-        //         [
-        //             'type_of_home' => $sanitizedData['type_of_home'],
-        //             'owners_name' => $sanitizedData['owners_name'],
-        //             'is_own_home' => $sanitizedData['is_own_home'],
-        //             'temporary_address' => $sanitizedData['temporary_address'],
-        //             'permanent_address' => $sanitizedData['permanent_address'],
-        //             'contact_details' => $sanitizedData['contact_details'],
-        //             'has_any_pet' => $sanitizedData['has_any_pet'],
-        //             'preferred_date' => $sanitizedData['preferred_date'],
-        //             'preferred_time' => $sanitizedData['preferred_time'],
-        //             'can_visit_shelter' => $sanitizedData['can_visit_shelter'],
-        //         ]
-        //     );
-
-        //     // if ($sanitizedData['has_any_pet']) {
-        //     //     foreach ($sanitizedData['pet_details'] as $petDetail) {
-        //     //         PetDetails::create([
-        //     //             'application_form_id' => $applicationForm->id,
-        //     //             'pet_name' => $petDetail['pet_name'],
-        //     //             'species' => $petDetail['species'],
-        //     //         ]);
-        //     //     }
-        //     // }
-
-        //     if ($sanitizedData['has_any_pet']) {
-        //         $petDetails = array_map(function ($petDetail) use ($applicationForm) {
-        //             return [
-        //                 'application_form_id' => $applicationForm->id,
-        //                 'pet_name' => $petDetail['pet_name'],
-        //                 'species' => $petDetail['species'],
-        //             ];
-        //         }, $sanitizedData['pet_details']);
-
-        //         PetDetails::insert($petDetails);
-        //     }
-
-
-        //     if ($applicationForm->exists) {
-        //         Adoption::updateOrCreate(
-        //             [
-        //                 'user_id' => $userId,
-        //                 'dog_id' => $dogId,
-        //             ],
-        //             [
-        //                 'adoption_number' => 'AR-'. date('His-') . strtoupper(Str::random(6)),
-        //                 'status' => 'pending',
-        //                 'request_date' => now(),
-        //             ]
-        //         );
-        //     }
-        // });
-
-        // session()->flash('message', 'Application submitted successfully.');
-
-        // $this->reset();
     }
 
     #[Title('Create Application Form')]

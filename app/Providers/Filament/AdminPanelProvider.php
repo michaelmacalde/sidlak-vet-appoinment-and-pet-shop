@@ -2,29 +2,32 @@
 
 namespace App\Providers\Filament;
 
-use App\Http\Middleware\CheckPaymentStatus;
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Filament\PanelProvider;
+
+
+use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationGroup;
+use Filament\Http\Middleware\Authenticate;
+use App\Http\Middleware\CheckPaymentStatus;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use App\Filament\AdminPanel\Pages\ShopAppDashboard;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
-    {
+    {   
+
         return $panel
             ->default()
             ->id('admin')
@@ -55,9 +58,15 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('imgs/sdas-logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
+            ->pages( 
+
+                
+                 [
+                    Pages\Dashboard::class,
+                ]
+              
+                
+            )
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
@@ -73,13 +82,11 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                CheckPaymentStatus::class,
+                // CheckPaymentStatus::class,
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
-                // ->authMiddleware([
-                //     Authenticate::class,
-                // ])
             ]);
+            // ->databaseNotifications();
     }
 }

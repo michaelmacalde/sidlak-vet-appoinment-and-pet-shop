@@ -23,10 +23,10 @@ class ListVolunteers extends ListRecords
     {
         return [
             null => Tab::make('All'),
-            'Dog Walking' => Tab::make()->query(fn ($query) => $query->where('role', 'dog_walking')),
-            'Event Assistant' => Tab::make()->query(fn ($query) => $query->where('role', 'event_assistant')),
-            'Admin Support' => Tab::make()->query(fn ($query) => $query->where('role', 'admin_support')),
-            'Community Outreach' => Tab::make()->query(fn ($query) => $query->where('role', 'community_outreach')),
+            'Dog Walking' => Tab::make()->query(fn ($query) => $query->where('volunteer_role', 'dog_walking')),
+            'Event Assistant' => Tab::make()->query(fn ($query) => $query->where('volunteer_role', 'event_assistant')),
+            'Admin Support' => Tab::make()->query(fn ($query) => $query->where('volunteer_role', 'admin_support')),
+            'Community Outreach' => Tab::make()->query(fn ($query) => $query->where('volunteer_role', 'community_outreach')),
         ];
     }
 

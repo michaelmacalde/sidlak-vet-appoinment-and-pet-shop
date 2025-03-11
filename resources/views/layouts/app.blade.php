@@ -7,6 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ config('app.name') . ' - ' .'SDAS' }}</title>
         <link rel="icon" href="{{ asset('imgs/sdas-logo.png') }}" type="image/png">
+       
+
         <!-- Fonts -->
         {{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
         <style>
@@ -17,6 +19,7 @@
 
         @vite(['resources/css/app.css'])
         @livewireStyles
+      
     </head>
     <body class="font-sans antialiased dark:bg-neutral-800">
         @include('navigation-menu')
@@ -24,6 +27,7 @@
             {{ $slot }}
         </main>
 
+        @livewire('ecommerce.get-cart')
          <livewire:partials.footer />
 
         @stack('modals')
@@ -54,7 +58,13 @@
                     snapKill();
                 });
             }
+
+           
+
         </script>
+
+
+            
 
     </body>
 </html>

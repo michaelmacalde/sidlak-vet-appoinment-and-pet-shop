@@ -22,17 +22,17 @@ class VolunteersChart extends ChartWidget
     protected function getData(): array
     {
         return match ($this->viewType) {
-            'roles' => $this->getRoleDistributionData(),
-            'status' => $this->getStatusDistributionData(),
+            'volunteer_roles' => $this->getRoleDistributionData(),
+            'volunteer_status' => $this->getStatusDistributionData(),
             default => $this->getVolunteerTrendsData(),
         };
     }
 
     protected function getRoleDistributionData(): array
     {
-        $roleData = Volunteer::select('role', DB::raw('COUNT(*) as count'))
-            ->where('status_type', 'approved')
-            ->groupBy('role')
+        $roleData = Volunteer::select('volunteer_role', DB::raw('COUNT(*) as count'))
+            ->where('volunteer_status_type', 'approved')
+            ->groupBy('volunteer_role')
             ->get();
 
         $roleColors = [
@@ -58,8 +58,8 @@ class VolunteersChart extends ChartWidget
 
     protected function getStatusDistributionData(): array
     {
-        $statusData = Volunteer::select('status_type', DB::raw('COUNT(*) as count'))
-            ->groupBy('status_type')
+        $statusData = Volunteer::select('volunteer_status_type', DB::raw('COUNT(*) as count'))
+            ->groupBy('volunteer_status_type')
             ->get();
 
         $statusColors = [
@@ -74,10 +74,10 @@ class VolunteersChart extends ChartWidget
                     'label' => 'Volunteer Status Distribution',
                     'data' => $statusData->pluck('count')->toArray(),
                     'backgroundColor' => array_map(fn($status) => $statusColors[$status],
-                        $statusData->pluck('status_type')->toArray()),
+                        $statusData->pluck('volunteer_status_type')->toArray()),
                 ],
             ],
-            'labels' => $statusData->pluck('status_type')->map(function($status) {
+            'labels' => $statusData->pluck('volunteer_status_type')->map(function($status) {
                 return ucfirst($status);
             })->toArray(),
         ];
@@ -89,13 +89,13 @@ class VolunteersChart extends ChartWidget
 
         // Get monthly data for approved volunteers
         $monthlyData = Volunteer::select(
-            DB::raw('DATE_FORMAT(joined_date, "%Y-%m") as month'),
-            'status',
+            DB::raw('DATE_FORMAT(volunteer_joined_date, "%Y-%m") as month'),
+            'volunteer_status',
             DB::raw('COUNT(*) as count')
         )
-            ->where('joined_date', '>=', $startDate)
-            ->where('status_type', 'approved')
-            ->groupBy('month', 'status')
+            ->where('volunteer_joined_date', '>=', $startDate)
+            ->where('volunteer_status_type', 'volunteer_approved')
+            ->groupBy('month', 'volunteer_status')
             ->orderBy('month')
             ->get();
 
@@ -112,8 +112,8 @@ class VolunteersChart extends ChartWidget
             $labels[] = $currentDate->format('M Y');
 
             $monthData = $monthlyData->where('month', $monthKey);
-            $activeData[] = $monthData->where('status', 'active')->first()?->count ?? 0;
-            $inactiveData[] = $monthData->where('status', 'inactive')->first()?->count ?? 0;
+            $activeData[] = $monthData->where('volunteer_status', 'active')->first()?->count ?? 0;
+            $inactiveData[] = $monthData->where('volunteer_status', 'inactive')->first()?->count ?? 0;
         }
 
         return [
@@ -140,7 +140,7 @@ class VolunteersChart extends ChartWidget
     protected function getType(): string
     {
         return match ($this->viewType) {
-            'roles', 'status' => 'doughnut',
+            'volunteer_roles', 'volunteer_status' => 'doughnut',
             default => 'line'
         };
     }
@@ -149,8 +149,8 @@ class VolunteersChart extends ChartWidget
     {
         return [
             'trends' => 'Monthly Trends',
-            'roles' => 'Role Distribution',
-            'status' => 'Status Distribution',
+            'volunteer_roles' => 'Role Distribution',
+            'volunteer_status' => 'Status Distribution',
         ];
     }
 

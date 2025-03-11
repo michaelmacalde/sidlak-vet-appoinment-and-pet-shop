@@ -184,12 +184,6 @@ class DonationPage extends Component
 
                 return redirect($redirectUrl); //ari sa laragon
 
-                // return redirect()->away($redirectUrl);
-                // herd setup ni ang redirect url
-                // redirect to paymongo payment page
-                // return $this->redirect(route('donation.redirect', [
-                //     'url' => $redirectUrl
-                // ]));
             }
 
         } catch (\Exception $e) {

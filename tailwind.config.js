@@ -9,7 +9,6 @@ export default {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        'node_modules/preline/dist/*.js',
     ],
 
     theme: {

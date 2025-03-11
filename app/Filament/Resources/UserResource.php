@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Models\Volunteer\Volunteer;
 use Filament\Forms;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Group;
@@ -13,9 +14,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -122,6 +125,71 @@ class UserResource extends Resource
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
                 Tables\Actions\DeleteBulkAction::make(),
+
+
+                BulkAction::make('assign_role')
+                ->icon('heroicon-o-shield-check')
+                ->color('primary')
+                ->label('Assign Role')
+                ->form([
+                    Forms\Components\Select::make('role')
+                        ->label('Role')
+                        ->options(
+                            Role::all()->mapWithKeys(function ($role) {
+                                $formattedName = str_replace('_', ' ', $role->name);
+                                $formattedName = ucwords($formattedName);
+                                return [$role->id => $formattedName];
+                            })
+                        )
+                        ->native(false)
+                        ->required()
+                        ->searchable()
+                        ->preload()
+                        ->optionsLimit(6),
+
+
+                    Forms\Components\Select::make('volunteer_role')
+                    ->label('Volunteer Role')
+                    ->required()
+                    ->options([
+                        'dog_walking' => 'Dog Walking',
+                        'event_assistance' => 'Event Assistance',
+                        'admin_support' => 'Admin Support',
+                        'community_outreach' => 'Community Outreach',
+                    ])->native(false),
+
+
+
+
+                ])
+                ->action(function (array $data, $records) {
+                    // Find the selected role
+                    $role = Role::findById($data['role']);
+
+                    // Assign role to selected users
+                    foreach ($records as $record) {
+                        // Remove existing roles and assign new role
+                        $record->syncRoles([$role]);
+
+
+                        Volunteer::updateOrCreate(
+                            ['user_id' => $record->id], // Unique identifier for lookup
+                            [
+                                'volunteer_role' => $data['volunteer_role'],
+                                'volunteer_reason' => 'I love dogs',
+                                'volunteer_status_type' => 'approved',
+                                'volunteer_status' => 'active',
+                                'volunteer_joined_date' => now(),
+                            ]);
+                    }
+
+                    Notification::make()
+                        ->success()
+                        ->title('Roles Assigned')
+                        ->body("Role '{$role->name}' assigned to selected users.")
+                        ->send();
+                })
+                ->deselectRecordsAfterCompletion()
             ]),
         ])
         ->deferLoading()

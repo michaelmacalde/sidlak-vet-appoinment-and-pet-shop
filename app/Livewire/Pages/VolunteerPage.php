@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class VolunteerPage extends Component
 {
@@ -34,11 +35,11 @@ class VolunteerPage extends Component
 
     protected function ensureVolunteerRoleExists()
     {
-        $volunteerRole = Role::where('name', 'volunteer')->first();
+        $volunteerRole = ModelsRole::where('name', 'volunteer')->first();
 
         if (!$volunteerRole) {
             // Create the volunteer role if it doesn't exist
-            Role::create(['name' => 'volunteer', 'guard_name' => 'web']);
+            ModelsRole::create(['name' => 'volunteer', 'guard_name' => 'web']);
         }
     }
 
@@ -78,10 +79,10 @@ class VolunteerPage extends Component
                 Volunteer::updateOrCreate(
                     ['user_id' => $user->id],
                     [
-                        'role' => $data['v_role'],
-                        'reason' => $data['v_reason'],
-                        'status' => 'inactive',
-                        'joined_date' => now(),
+                        'volunteer_role' => $data['v_role'],
+                        'volunteer_reason' => $data['v_reason'],
+                        'volunteer_status' => 'inactive',
+                        'volunteer_joined_date' => now(),
                     ]
                 );
 

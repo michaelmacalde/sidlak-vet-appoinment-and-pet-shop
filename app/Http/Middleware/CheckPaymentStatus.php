@@ -17,20 +17,28 @@ class CheckPaymentStatus
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // $getAllPayments = Paymongo::payment()->all();
 
-        try{
+        $paymentIntent = Paymongo::paymentIntent()->all();
 
-            $getAllPayments = Paymongo::payment()->all();
-
+        dd($paymentIntent);
             // foreach ($getAllPayments as $payment) {
             //     dd($payment->payment_intent_id);
             // }
 
-            // dd($getAllPayments->payment_intent_id);
+        // try{
 
-        }catch (\Exception $e) {
-            return redirect()->route('page.donate');
-        }
+        //     $getAllPayments = Paymongo::payment()->all();
+
+        //     // foreach ($getAllPayments as $payment) {
+        //     //     dd($payment->payment_intent_id);
+        //     // }
+
+        //     // dd($getAllPayments->payment_intent_id);
+
+        // }catch (\Exception $e) {
+        //     return redirect()->route('page.donate');
+        // }
         // try {
         //     // $user = $request->user();
         //     // if ($user->payment_status != 'paid') {

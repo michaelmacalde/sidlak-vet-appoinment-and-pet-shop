@@ -265,24 +265,24 @@
 
     <!-- Card -->
     <div class="mt-16 text-center">
-    <div class="inline-block bg-white border rounded-full shadow-sm dark:bg-neutral-900 dark:border-neutral-800">
-        <div class="flex items-center px-4 py-3 gap-x-2">
-        <p class="text-gray-600 dark:text-neutral-400">
-            Want to read more?
-        </p>
-        <a class="inline-flex items-center gap-x-1.5 text-amber-600 decoration-2 hover:underline font-medium dark:text-amber-500" href="{{ route('page.blogs') }}">
-            Go here
-            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
+        <div class="inline-block bg-white border rounded-full shadow-sm dark:bg-neutral-900 dark:border-neutral-800">
+            <div class="flex items-center px-4 py-3 gap-x-2">
+            <p class="text-gray-600 dark:text-neutral-400">
+                Want to read more?
+            </p>
+            <a class="inline-flex items-center gap-x-1.5 text-amber-600 decoration-2 hover:underline font-medium dark:text-amber-500" href="{{ route('page.blogs') }}">
+                Go here
+                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            </div>
         </div>
-    </div>
     </div>
     <!-- End Card -->
     </div>
     <!-- End Card Blog -->
 
     <!-- Subscribe -->
-    <div class="max-w-full px-4 py-10 mx-auto sm:px-6 lg:px-8 lg:py-16 bg-slate-200 dark:bg-neutral-700">
+    {{-- <div class="max-w-full px-4 py-10 mx-auto sm:px-6 lg:px-8 lg:py-16 bg-slate-200 dark:bg-neutral-700">
     <div class="grid gap-8 mx-auto md:grid-cols-2 max-w-7xl">
     <div class="max-w-md">
         <h2 class="text-2xl font-bold md:text-3xl md:leading-tight dark:text-white">Subscribe</h2>
@@ -308,7 +308,7 @@
         </div>
     </form>
     </div>
-    </div>
+    </div> --}}
     <!-- End Subscribe -->
 </div>
 

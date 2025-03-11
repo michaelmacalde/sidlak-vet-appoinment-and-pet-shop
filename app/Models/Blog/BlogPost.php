@@ -2,6 +2,7 @@
 
 namespace App\Models\Blog;
 
+use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,4 +51,10 @@ class BlogPost extends Model
             $query->where('category_slug', $category);
         });
     }
+
+    public function announcements() : HasMany
+    {
+        return $this->hasMany(Announcement::class);
+    }
+
 }

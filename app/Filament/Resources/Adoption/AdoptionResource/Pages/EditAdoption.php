@@ -4,9 +4,11 @@ namespace App\Filament\Resources\Adoption\AdoptionResource\Pages;
 
 use App\Enums\AdoptionEnum;
 use App\Filament\Resources\Adoption\AdoptionResource;
+use App\Mail\AdoptionStatusUpdatedMail;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class EditAdoption extends EditRecord
 {
@@ -63,6 +65,20 @@ class EditAdoption extends EditRecord
             case AdoptionEnum::REJECTED->value:
             default:
                 return 'available';
+        }
+    }
+
+    protected function afterSave(): void
+    {
+        $adoption = $this->record;
+
+        if ($adoption->wasChanged('status')) {
+
+            $getStatus = AdoptionEnum::tryFrom($adoption->status);
+
+            if ($getStatus === AdoptionEnum::APPROVED || $getStatus === AdoptionEnum::REJECTED) {
+                Mail::to($adoption->user->email)->send(new AdoptionStatusUpdatedMail($adoption->user, $getStatus, $adoption->user_id));
+            }
         }
     }
 

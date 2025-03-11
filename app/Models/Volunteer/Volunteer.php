@@ -13,7 +13,12 @@ class Volunteer extends Model
 
     protected $table = 'volunteers';
     protected $fillable = [
-        'user_id', 'role', 'reason', 'status', 'status_type', 'joined_date'
+        'user_id',
+        'volunteer_role',
+        'volunteer_reason',
+        'volunteer_status',
+        'volunteer_status_type',
+        'volunteer_joined_date'
     ];
 
 

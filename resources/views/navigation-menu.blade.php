@@ -46,6 +46,16 @@
 
                 @endguest
 
+                    {{-- add to cart button --}}
+                    @livewire('ecommerce.cart-count')
+                {{-- <button type="button" class="inline-flex items-center gap-x-2 text-sm font-medium rounded-lg focus:outline-none disabled:opacity-50 disabled:pointer-events-none" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-offcanvas-custom-backdrop-color" data-hs-overlay="#hs-offcanvas-custom-backdrop-color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="font-medium text-amber-400 dark:text-neutral-400 dark:hover:text-neutral-500 hover:text-gray-400">
+                        <circle cx="8" cy="21" r="1"></circle>
+                        <circle cx="19" cy="21" r="1"></circle>
+                        <path d="M2.5 2.5h2.9l3.8 11.4a2 2 0 0 0 1.9 1.4h7.5a2 2 0 0 0 1.9-1.4L22 6.5H6"></path>
+                    </svg>
+                </button> --}}
+
 
                 <button type="button" class="block font-medium text-gray-800 rounded-full hs-dark-mode-active:hidden hs-dark-mode hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" data-hs-theme-click-value="dark">
                     <span class="inline-flex items-center justify-center group shrink-0 size-9">
@@ -74,7 +84,7 @@
                     <div class="relative inline-flex hs-dropdown" data-hs-dropdown-placement="bottom-right">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
-                                <img class="object-cover w-8 h-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                <img class="object-cover w-8 h-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="" />
                             </button>
                         @else
                             <span class="inline-flex rounded-md">
@@ -101,7 +111,7 @@
                             {{ __('Profile') }}
                             </a>
 
-                            <a href="{{ Auth::user()->hasAnyRole(['admin', 'volunteer', 'super_admin']) ? '/admin' : route('dashboard') }}"
+                            <a href="{{ Auth::user()->hasAnyRole(['admin', 'super_admin','admin_shop']) ? route('filament.admin.pages.dashboard') : route('dashboard') }}"
                                 class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-amber-500 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300">
                                 <svg class="flex-shrink-0 size-4" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
@@ -160,9 +170,27 @@
                 <x-nav-link wire:navigate href="{{ route('page.dogs') }}" :active="request()->routeIs('page.dogs') || request()->routeIs('page.dog.single')">{{ __('Dogs') }}</x-nav-link>
                 <x-nav-link wire:navigate.hover href="{{ route('page.blogs') }}" :active="request()->routeIs('page.blogs') || request()->routeIs('page.blog.single')">{{ __('Blogs') }}</x-nav-link>
                 <x-nav-link wire:navigate.hover href="{{ route('page.contact') }}" :active="request()->routeIs('page.contact')">{{ __('Contact') }}</x-nav-link>
+                <x-nav-link wire:navigate.hover href="{{ route('page.shop') }}" :active="request()->routeIs('page.shop')">{{ __('Shop') }}</x-nav-link>
+                {{-- <x-nav-link wire:navigate.hover href="{{ route('page.get-cart') }}" :active="request()->routeIs('page.get-cart')">{{ __('Cart') }}</x-nav-link> --}}
+              
+            
+                
             </div>
         </div>
 
         </nav>
+
+
+
+    
+      
+     
+          
+          
+          
+        
+          
+         
+
     </header>
 </div>

@@ -21,11 +21,11 @@ class VolunteerStatsOverview extends BaseWidget
         $volunteerStats = Volunteer::query()
             ->select([
                 DB::raw('COUNT(*) as total'),
-                DB::raw("SUM(CASE WHEN status_type = 'pending' THEN 1 ELSE 0 END) as pending"),
-                DB::raw("SUM(CASE WHEN status_type = 'approved' THEN 1 ELSE 0 END) as approved"),
-                DB::raw("SUM(CASE WHEN status_type = 'rejected' THEN 1 ELSE 0 END) as rejected"),
-                DB::raw("SUM(CASE WHEN status_type = 'approved' AND created_at >= '$currentMonth' THEN 1 ELSE 0 END) as current_month_approved"),
-                DB::raw("SUM(CASE WHEN status_type = 'approved' AND created_at >= '$previousMonth' AND created_at < '$currentMonth' THEN 1 ELSE 0 END) as previous_month_approved")
+                DB::raw("SUM(CASE WHEN volunteer_status_type = 'pending' THEN 1 ELSE 0 END) as pending"),
+                DB::raw("SUM(CASE WHEN volunteer_status_type = 'approved' THEN 1 ELSE 0 END) as approved"),
+                DB::raw("SUM(CASE WHEN volunteer_status_type = 'rejected' THEN 1 ELSE 0 END) as rejected"),
+                DB::raw("SUM(CASE WHEN volunteer_status_type = 'approved' AND created_at >= '$currentMonth' THEN 1 ELSE 0 END) as current_month_approved"),
+                DB::raw("SUM(CASE WHEN volunteer_status_type = 'approved' AND created_at >= '$previousMonth' AND created_at < '$currentMonth' THEN 1 ELSE 0 END) as previous_month_approved")
             ])
             ->first();
 
