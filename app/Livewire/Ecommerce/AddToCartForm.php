@@ -71,8 +71,6 @@ class AddToCartForm extends Component
             Cart::where('session_id', $session_id)
                 ->update(['user_id' => $user_id, 'session_id' => null]);
         }
-
-
         // Check if the product is already in the cart
         $cart = Cart::where('product_id', $product->id)
             ->where(function ($query) use ($user_id, $session_id) {
